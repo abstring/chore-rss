@@ -1,0 +1,16 @@
+{
+  "name": "chore-rss",
+  "version": "1.0.0",
+  "description": "Cloudflare Worker to generate an RSS feed for chore assignments",
+  "main": "worker.js",
+  "scripts": {
+    "build": "echo 'No build step required'",
+    "deploy": "wrangler deploy"
+  },
+  "dependencies": {
+    "moment-timezone": "^0.5.34"
+  },
+  "devDependencies": {
+    "wrangler": "^3.99.0"
+  }
+}
