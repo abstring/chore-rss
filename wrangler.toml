@@ -1,0 +1,8 @@
+name = "chore-rss"
+type = "javascript"
+
+[build]
+command = "npm install"
+
+[build.upload]
+main = "worker.js"
