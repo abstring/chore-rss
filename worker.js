@@ -35,7 +35,7 @@ export default {
         <link>https://chore-rss.abstring.workers.dev/chore-update</link>
         <description>
           <![CDATA[
-            <p>v1.5 Week ${currentWeek}, current as of ${formattedDate} (Eastern Time). ${daysUntilNextFriday} more days until chores switch.</p>
+            <p>v1.6 Week ${currentWeek}, current as of ${formattedDate} (Eastern Time). ${daysUntilNextFriday} more days until chores switch.</p>
           ]]>
         </description>
         <pubDate>${formattedDate}</pubDate>
