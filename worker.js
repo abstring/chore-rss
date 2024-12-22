@@ -1,7 +1,7 @@
 export default {
     async fetch(request) {
       const timezone = "America/New_York"; // Specify the desired timezone
-      const version = "1.6.3"; // Update the version for clarity
+      const version = "1.6.4"; // Updated version for clarity
   
       const sons = ["Neal", "Noah", "Nate"];
       const chores = ["Kitchen and Trash", "Dogs", "Dogs"]; // Nate starts on "Kitchen and Trash"
@@ -38,6 +38,9 @@ export default {
       // Calculate days since start of the year and the current week
       const daysSinceStart = Math.floor((currentDate - startOfYear) / (24 * 60 * 60 * 1000));
       const currentWeek = Math.ceil((daysSinceStart + startOfYear.getDay() + 1) / 7);
+  
+      // Calculate the next Friday in the specified timezone
+      const daysUntilNextFriday = (5 - currentDate.getDay() + 7) % 7 || 7; // Ensure Friday is always calculated correctly
   
       // Set the initial chore rotation offset to ensure Nate starts on "Kitchen and Trash"
       const initialRotationOffset = 2; // Nate should be first, Neal next, Noah last
