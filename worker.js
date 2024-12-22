@@ -1,10 +1,10 @@
 export default {
     async fetch(request) {
-      const timezone = "America/New_York"; // Specify the desired timezone (e.g., "America/Los_Angeles")
-      const version = "1.6.1"; // Specify the version of the worker script
+      const timezone = "America/New_York"; // Specify the desired timezone
+      const version = "1.6.2"; // Specify the version of the RSS feed
   
       const sons = ["Neal", "Noah", "Nate"];
-      const chores = ["Kitchen and Trash", "Dogs", "Dogs"];
+      const chores = ["Kitchen and Trash", "Dogs", "Dogs"]; // Nate starts on "Kitchen and Trash"
   
       // Helper function to convert a Date object to the specified timezone
       function convertToTimezone(date, timezone) {
@@ -18,7 +18,6 @@ export default {
           second: "numeric",
           hour12: false,
         });
-        // Parse the formatted date into a new Date object
         const parts = timeZoneFormatter.formatToParts(date);
         const year = parseInt(parts.find(part => part.type === "year").value);
         const month = parseInt(parts.find(part => part.type === "month").value) - 1; // Month is zero-based
@@ -46,7 +45,11 @@ export default {
       nextFriday.setDate(currentDate.getDate() + daysUntilNextFriday);
   
       // Rotate chores based on the current week
-      const rotatedChores = chores.map((_, index) => chores[(index + currentWeek - 1) % chores.length]);
+      // Nate starts with "Kitchen and Trash" this week
+      const initialRotationOffset = 1; // Set to align Nate -> Neal -> Noah rotation
+      const rotatedChores = chores.map(
+        (_, index) => chores[(index + currentWeek - 1 + initialRotationOffset) % chores.length]
+      );
       const assignments = sons.map((son, index) => `${son}: ${rotatedChores[index]}`).join(" ~~ ");
   
       // Format the date in the specified timezone
@@ -75,7 +78,7 @@ export default {
         <link>https://chore-rss.abstring.workers.dev/chore-update</link>
         <description>
           <![CDATA[
-            <p>Week ${currentWeek}, current as of ${formattedDate} (${timezone.replace("_", " ")}). ${daysUntilNextFriday} more days until chores switch.</p>
+            <p>v${version} Week ${currentWeek}, current as of ${formattedDate} (${timezone.replace("_", " ")}). ${daysUntilNextFriday} more days until chores switch.</p>
           ]]>
         </description>
         <pubDate>${formattedDate}</pubDate>
