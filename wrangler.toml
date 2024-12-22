@@ -1,0 +1,7 @@
+name = "chore-rss" # Name of your worker (must be unique across Cloudflare)
+main = "./worker.js" # Entry point of your worker script (adjust the path to your script)
+compatibility_date = "2024-12-22" # Date to pin the runtime environment (today's date is fine)
+
+# Optional: If using GitHub integration with deployments
+account_id = "954815d8a13e2c013fac016a5d2180c7" # Get this from the Cloudflare dashboard
+workers_dev = true # Use this if deploying to the development environment
