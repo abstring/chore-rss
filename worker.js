@@ -1,7 +1,7 @@
 export default {
     async fetch(request) {
       const timezone = "America/New_York"; // Specify the desired timezone
-      const version = "1.6.2"; // Specify the version of the RSS feed
+      const version = "1.6.3"; // Update the version for clarity
   
       const sons = ["Neal", "Noah", "Nate"];
       const chores = ["Kitchen and Trash", "Dogs", "Dogs"]; // Nate starts on "Kitchen and Trash"
@@ -39,28 +39,22 @@ export default {
       const daysSinceStart = Math.floor((currentDate - startOfYear) / (24 * 60 * 60 * 1000));
       const currentWeek = Math.ceil((daysSinceStart + startOfYear.getDay() + 1) / 7);
   
-      // Calculate the next Friday in the specified timezone
-      const daysUntilNextFriday = (5 - currentDate.getDay() + 7) % 7 || 7;
-      const nextFriday = new Date(currentDate);
-      nextFriday.setDate(currentDate.getDate() + daysUntilNextFriday);
-  
-      // Rotate chores based on the current week
-      // Nate starts with "Kitchen and Trash" this week
-      const initialRotationOffset = 1; // Set to align Nate -> Neal -> Noah rotation
+      // Set the initial chore rotation offset to ensure Nate starts on "Kitchen and Trash"
+      const initialRotationOffset = 2; // Nate should be first, Neal next, Noah last
       const rotatedChores = chores.map(
         (_, index) => chores[(index + currentWeek - 1 + initialRotationOffset) % chores.length]
       );
       const assignments = sons.map((son, index) => `${son}: ${rotatedChores[index]}`).join(" ~~ ");
   
-      // Format the date in the specified timezone
+      // Format the current date in the specified timezone
       const timeZoneFormatter = new Intl.DateTimeFormat("en-US", {
         timeZone: timezone,
         year: "numeric",
-        month: "numeric",
-        day: "numeric",
-        hour: "numeric",
-        minute: "numeric",
-        hour12: false,
+        month: "2-digit",
+        day: "2-digit",
+        hour: "2-digit",
+        minute: "2-digit",
+        hour12: true,
       });
       const formattedDate = timeZoneFormatter.format(currentDate);
   
